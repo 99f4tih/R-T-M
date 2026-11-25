@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="description" content="RİTİM — kişisel yaşam ve görev yönetimi" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <title>RİTİM</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">R</div><div><strong>RİTİM</strong><small>PERSONAL SYSTEM</small></div></div>
+      <div class="nav-label">ÇALIŞMA ALANI</div>
+      <nav id="mainNav">
+        <button class="nav-item active" data-view="today"><span>◷</span> Bugün</button>
+        <button class="nav-item" data-view="planner"><span>▦</span> Planner</button>
+        <button class="nav-item" data-view="tasks"><span>☷</span> Tüm görevler</button>
+        <button class="nav-item" data-view="focus"><span>◎</span> Focus Mode</button>
+      </nav>
+      <div class="nav-label spaced">YAŞAM</div>
+      <nav>
+        <button class="nav-item" data-view="habits"><span>✳</span> Rutinler</button>
+        <button class="nav-item" data-view="progress"><span>↗</span> İlerleme</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sync-card"><span class="status-dot"></span><div><strong>Bu cihazda kayıtlı</strong><small>Bulut senkronizasyonu sonraki aşamada</small></div></div>
+        <button class="nav-item" data-view="settings"><span>⚙</span> Ayarlar</button>
+        <div class="profile"><div class="avatar">F</div><div><strong>Fatih</strong><small>Kişisel çalışma alanı</small></div></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="mobile-brand"><div class="brand-mark">R</div><strong>RİTİM</strong></div>
+        <div class="breadcrumbs"><span>Çalışma alanı</span><b>/</b><strong id="pageCrumb">Bugün</strong></div>
+        <div class="top-actions"><span class="date-chip" id="todayDate"></span><button class="icon-btn" id="notificationBtn" title="Bildirim izni">♧</button><button class="primary-btn" id="quickAdd">＋ Yeni görev</button></div>
+      </header>
+
+      <section class="view active" id="view-today">
+        <div class="welcome-row"><div><p class="eyebrow" id="greeting">GÜNÜN ÖZETİ</p><h1>Bugün neye odaklanıyoruz?</h1><p class="muted">Önündeki işleri netleştir. Bir sonraki adımı seç.</p></div><div class="clock-card"><span>ŞU AN</span><strong id="liveClock">--:--</strong><small id="liveDate"></small></div></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-label">TAMAMLANAN</span><strong id="completedCount">0</strong><small>Bugünkü görevler</small></article>
+          <article class="stat-card"><span class="stat-label">KALAN</span><strong id="remainingCount">0</strong><small>Bekleyen görevler</small></article>
+          <article class="stat-card"><span class="stat-label">FIX GÖREVLER</span><strong id="fixCount">0</strong><small>Öncelikli işler</small></article>
+          <article class="stat-card progress-stat"><span class="stat-label">GÜNLÜK İLERLEME</span><strong id="progressPercent">0%</strong><div class="progress-track"><i id="progressBar"></i></div></article>
+        </div>
+        <div class="content-grid">
+          <section class="panel task-panel"><div class="panel-heading"><div><p class="eyebrow">GÜNLÜK PLAN</p><h2>Bugünün görevleri</h2></div><button class="text-btn" data-go="tasks">Tümünü gör →</button></div><div id="todayTasks" class="task-list"></div><div class="empty-state" id="todayEmpty"><div class="empty-icon">✓</div><strong>Bugün için görev yok</strong><p>İlk görevini ekleyerek gününü planla.</p><button class="secondary-btn" id="emptyAdd">＋ Görev ekle</button></div></section>
+          <aside class="right-column"><section class="panel next-panel"><p class="eyebrow">SIRADAKİ ADIM</p><div id="nextTask"><div class="next-placeholder">Henüz sıradaki görev yok.</div></div></section><section class="panel quick-panel"><p class="eyebrow">HIZLI ERİŞİM</p><button class="quick-link" data-go="planner"><span>▦</span><span><strong>Yarını planla</strong><small>Bir sonraki günü hazırla</small></span><b>→</b></button><button class="quick-link" data-go="focus"><span>◎</span><span><strong>Odak oturumu</strong><small>Tek işe odaklan</small></span><b>→</b></button></section></aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-planner"><div class="page-heading"><div><p class="eyebrow">ÖNCEDEN HAZIRLAN</p><h1>Planner</h1><p class="muted">Yarına soru işaretiyle başlama. Planını önceden oluştur.</p></div><button class="primary-btn" id="plannerAdd">＋ Görev ekle</button></div><div class="planner-toolbar"><button class="secondary-btn" id="prevDay">← Önceki</button><div><strong id="plannerDate"></strong><small id="plannerSubdate"></small></div><button class="secondary-btn" id="nextDay">Sonraki →</button><button class="text-btn" id="tomorrowBtn">Yarına git</button></div><div class="panel planner-panel"><div id="plannerTasks" class="timeline"></div><div class="empty-state" id="plannerEmpty"><div class="empty-icon">▦</div><strong>Bu gün henüz planlanmadı</strong><p>Görevlerini ekle, saatlerini belirle.</p><button class="secondary-btn" id="plannerEmptyAdd">＋ İlk görevi ekle</button></div></div></section>
+
+      <section class="view" id="view-tasks"><div class="page-heading"><div><p class="eyebrow">GÖREV YÖNETİMİ</p><h1>Tüm görevler</h1><p class="muted">Görev ekle, düzenle, alarm kur ve tamamla.</p></div><button class="primary-btn" id="tasksAdd">＋ Yeni görev</button></div><div class="filter-row"><button class="filter-chip selected" data-filter="all">Tümü</button><button class="filter-chip" data-filter="today">Bugün</button><button class="filter-chip" data-filter="tomorrow">Yarın</button><button class="filter-chip" data-filter="fix">FIX</button><button class="filter-chip" data-filter="open">Bekleyen</button><button class="filter-chip" data-filter="done">Tamamlanan</button></div><div class="panel"><div id="allTasks" class="task-list"></div><div class="empty-state" id="allEmpty"><div class="empty-icon">☷</div><strong>Görev bulunamadı</strong><p>Yeni bir görev oluşturarak başlayabilirsin.</p></div></div></section>
+
+      <section class="view" id="view-focus"><div class="focus-wrap"><p class="eyebrow">RİTİM · FOCUS MODE</p><h1>Tek iş. Tam dikkat.</h1><p class="muted">Bir görev seç ve dikkatini ona ver.</p><div class="focus-card"><label for="focusTaskSelect">Odaklanılacak görev</label><select id="focusTaskSelect"><option value="">Görev seç</option></select><div class="focus-timer" id="focusTimer">25:00</div><div class="focus-progress"><i id="focusProgress"></i></div><div class="focus-controls"><button class="secondary-btn" id="focusReset">Sıfırla</button><button class="primary-btn" id="focusStart">Başlat</button><button class="secondary-btn" id="focusPause">Duraklat</button></div><div class="focus-presets"><button class="filter-chip selected" data-minutes="25">25 / 5</button><button class="filter-chip" data-minutes="50">50 / 10</button><button class="filter-chip" data-minutes="15">15 dakika</button></div></div><p class="focus-note">Bu ilk sürümde odak zamanlayıcısı uygulama açıkken çalışır. Sistem seviyesinde ekran üstü uyarılar sonraki yerel entegrasyon aşamasında eklenecek.</p></div></section>
+
+      <section class="view" id="view-habits"><div class="page-heading"><div><p class="eyebrow">GÜNLÜK TEMEL</p><h1>Rutinler</h1><p class="muted">Küçük ve sürdürülebilir adımları takip et.</p></div></div><div class="habit-grid" id="habitGrid"></div></section>
+      <section class="view" id="view-progress"><div class="page-heading"><div><p class="eyebrow">DEVAMLILIK</p><h1>İlerleme</h1><p class="muted">Geçmişini gör. Gelişimini takip et.</p></div></div><div class="stats-grid"><article class="stat-card"><span class="stat-label">TOPLAM GÖREV</span><strong id="totalAll">0</strong><small>Kaydedilen görevler</small></article><article class="stat-card"><span class="stat-label">TAMAMLANAN</span><strong id="totalDone">0</strong><small>Bitirdiğin görevler</small></article><article class="stat-card"><span class="stat-label">TAMAMLANMA ORANI</span><strong id="completionRate">0%</strong><small>Tüm görevler</small></article><article class="stat-card"><span class="stat-label">FIX GÖREVLER</span><strong id="totalFix">0</strong><small>Öncelikli görevler</small></article></div><div class="panel report-panel"><h2>Son görevler</h2><div id="recentTasks" class="task-list"></div></div></section>
+      <section class="view" id="view-settings"><div class="page-heading"><div><p class="eyebrow">KİŞİSELLEŞTİRME</p><h1>Ayarlar</h1><p class="muted">RİTİM'i kendi düzenine göre ayarla.</p></div></div><div class="settings-grid"><section class="panel settings-panel"><h2>Günlük düzen</h2><div class="setting-row"><div><strong>Uyanma saati</strong><small>Hedef uyanma zamanın</small></div><input type="time" id="wakeTime" value="05:15"></div><div class="setting-row"><div><strong>Uyku hedefi</strong><small>Yatış saatin</small></div><input type="time" id="sleepTime" value="21:15"></div><div class="setting-row"><div><strong>Akşam planlama hatırlatması</strong><small>Ertesi günü planlama zamanı</small></div><input type="time" id="planningTime" value="20:30"></div><button class="primary-btn" id="saveSettings">Ayarları kaydet</button></section><section class="panel settings-panel"><h2>Bildirimler</h2><p class="muted small">Tarayıcı bildirim iznini etkinleştir. Bu ilk sürümde zamanlanmış alarmlar uygulama açıkken çalışır; güvenilir arka plan alarmları Android yerel entegrasyonuyla eklenecek.</p><button class="secondary-btn" id="requestPermission">Bildirim izni ver</button><div class="setting-row"><div><strong>Bildirim durumu</strong><small id="permissionStatus">Kontrol ediliyor</small></div><span class="status-pill" id="permissionPill">—</span></div></section><section class="panel settings-panel"><h2>Veri</h2><p class="muted small">Şu an görevlerin bu tarayıcıda yerel olarak saklanıyor. Bulut hesabı ve iki cihaz senkronizasyonu sonraki aşamada bağlanacak.</p><button class="secondary-btn" id="exportData">Verileri dışa aktar (JSON)</button><button class="danger-btn" id="clearData">Tüm yerel verileri sil</button></section></div></section>
+    </main>
+  </div>
+
+  <dialog id="taskDialog" class="task-dialog"><form id="taskForm" method="dialog"><div class="dialog-head"><div><p class="eyebrow">GÖREV YÖNETİMİ</p><h2 id="dialogTitle">Yeni görev</h2></div><button type="button" class="close-btn" id="closeDialog">×</button></div><input type="hidden" id="taskId"><label>Görev adı<input id="taskTitle" required maxlength="100" placeholder="Örn. Müşteri videosunu tamamla"></label><label>Açıklama<textarea id="taskDescription" rows="2" placeholder="Görevle ilgili kısa not..."></textarea></label><div class="form-grid"><label>Tarih<input type="date" id="taskDate" required></label><label>Saat<input type="time" id="taskTime"></label><label>Öncelik<select id="taskPriority"><option value="normal">Normal</option><option value="high">Yüksek</option><option value="urgent">Çok yüksek</option></select></label><label>Görev türü<select id="taskType"><option value="normal">Normal</option><option value="fix">FIX — Öncelikli</option></select></label></div><div class="form-divider"></div><label class="check-row"><input type="checkbox" id="alarmEnabled"><span><strong>Bu görev için hatırlatma kur</strong><small>Görev saatinde bildirim gönder</small></span></label><div class="form-grid" id="alarmFields"><label>İlk hatırlatma<input type="time" id="alarmTime"></label><label>Tekrar aralığı<select id="alarmInterval"><option value="0">Tek sefer</option><option value="5">5 dakika</option><option value="10" selected>10 dakika</option><option value="15">15 dakika</option><option value="30">30 dakika</option></select></label></div><div class="dialog-actions"><button type="button" class="secondary-btn" id="cancelDialog">Vazgeç</button><button type="submit" class="primary-btn">Görevi kaydet</button></div></form></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
